@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Audit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/static/survey/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/survey/font-awesome/css/font-awesome.min.css" />
+
+    <script type="text/javascript" src="/static/survey/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/static/survey/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <br><br>
+        <!-- Survey - START -->
+        <div class="container">
+            <form action="/add_reponse" method="post">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Information personnelle</div>
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="col-md-2">Nom:</div>
+                                <div class="col-md-4">
+                                    <input type="text" name="nom" id="" class="form-control">
+                                </div>
+                                <div class="col-md-2">Prénom:</div>
+                                <div class="col-md-4">
+                                    <input type="text" name="prenom" id="" class="form-control">
+                                </div>
+                            </div>
+
+                            <br>
+                            <br>
+                            <div class="col-md-12">
+                                <div class="col-md-4">Sexe:</div>
+                                <div class="btn-group col-md-8" data-toggle="buttons">
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="sexe" value="Masculin" autocomplete="off" /> Masculin
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="sexe" value="Féminin" autocomplete="off" /> Féminin
+                                    </label>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="col-md-12">
+                                <div class="col-md-2">Profession:</div>
+                                <div class="col-md-4">
+                                    <input type="text" name="profession" id="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% for tache in list_tache %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{tache['tache']}}</div>
+                        <div class="panel-body">
+                            {% for var in list_qst %}
+                            {% if var['tache']['id']==tache['id'] %}
+                            <div class="col-md-4">{{var['question']}}</div>
+                            <div class="col-md-5">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="resp{{var['id']}}" value="Non" autocomplete="off" />Non
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="resp{{var['id']}}" value="Plutôt Non" autocomplete=" off" />Plutôt Non
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="resp{{var['id']}}" value="Ni oui/Ni non" autocomplete=" off" />Ni oui/Ni non
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="resp{{var['id']}}" value="Oui" autocomplete=" off" />Oui
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="radio" name="resp{{var['id']}}" value="Plutôt oui" autocomplete=" off" />Plutôt oui
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <textarea name="justif{{var['id']}}" class="form-control" id="" cols="30" rows="2"
+                                    placeholder="Justificatif" required></textarea>
+                            </div>
+                            <br />
+                            <br />
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+
+        <!-- you need to include the shieldui css and js assets in order for the components to work -->
+        <link rel="stylesheet" type="text/css"
+            href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
+        <script type="text/javascript"
+            src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+
+
+        <!-- Survey - END -->
+
+    </div>
+
+</body>
+
+</html>
